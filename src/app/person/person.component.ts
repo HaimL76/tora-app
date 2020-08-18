@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonDetailsComponent } from '../person-details/person-details.component';
 
 @Component({
   selector: 'app-person',
@@ -12,4 +13,10 @@ export class PersonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Method in component class
+  trackByFn(index, item) {
+    return item.id;
+  }
+
+  items: PersonDetailsComponent[] = [new PersonDetailsComponent()];
 }
