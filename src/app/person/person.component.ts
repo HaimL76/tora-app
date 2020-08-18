@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonDetailsComponent } from '../person-details/person-details.component';
+
+export interface Person {
+  name: string;
+  phone: string;
+}
 
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
   styleUrls: ['./person.component.css']
 })
+
 export class PersonComponent implements OnInit {
 
   constructor() { }
@@ -18,5 +23,5 @@ export class PersonComponent implements OnInit {
     return item.id;
   }
 
-  items: PersonDetailsComponent[] = [new PersonDetailsComponent()];
+  items: Person[] = [{name: "HaimL", phone: "0525868060"}, {name: "Einatush", phone: "0525868070"}];
 }
