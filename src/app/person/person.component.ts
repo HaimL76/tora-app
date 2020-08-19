@@ -16,6 +16,8 @@ export class PersonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    for (let i = 0; i < 10; i++)
+      this.items.push({name: i.toString(), phone: i.toString()});
   }
 
   // Method in component class
