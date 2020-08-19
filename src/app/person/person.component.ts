@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 export interface Person {
   name: string;
@@ -13,11 +14,12 @@ export interface Person {
 
 export class PersonComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < 10; i++)
-      this.items.push({name: i.toString(), phone: i.toString()});
+    this.http.get('http://localhost:3000/dowork').subscribe( data => {
+      this.items.push({name: data.json(), phone: data.json()});
+    });
   }
 
   // Method in component class
