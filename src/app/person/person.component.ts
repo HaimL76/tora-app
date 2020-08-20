@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 export interface Person {
   name: string;
@@ -14,11 +16,11 @@ export interface Person {
 
 export class PersonComponent implements OnInit {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/dowork').subscribe( data => {
-      this.items.push({name: data.json(), phone: data.json()});
+    this.http.get('http://localhost:3000/DoWork').subscribe( data => {
+      this.items.push({name: data.toString(), phone: data.toString()});
     });
   }
 
