@@ -19,9 +19,10 @@ export class PersonComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/DoWork').subscribe( data => {
-      this.items.push({name: data.toString(), phone: data.toString()});
-    });
+    this.http.get('http://localhost:3000/DoWork').subscribe(
+      data => this.items.push({name: "HaimsssL", phone: "052586sss8060"}),
+      error => this.items.push({name: JSON.stringify(error), phone: JSON.stringify(error)})
+  )
   }
 
   // Method in component class
