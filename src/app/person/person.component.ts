@@ -19,10 +19,15 @@ export class PersonComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    const name = 'name';
+    const phone = 'phone';
+
     this.http.get('http://localhost:3000/DoWork').subscribe(
-      data => this.items.push({name: "HaimsssL", phone: "052586sss8060"}),
-      error => this.items.push({name: JSON.stringify(error), phone: JSON.stringify(error)})
-  )
+      data => {
+        if (name in data && phone in data)
+        this.items.push({name: data[name], phone: data[phone]});
+      },
+      error => this.items.push({name: JSON.stringify(error), phone: JSON.stringify(error)}))
   }
 
   // Method in component class
