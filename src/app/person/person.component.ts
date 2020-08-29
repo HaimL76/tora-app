@@ -25,13 +25,12 @@ export class PersonComponent implements OnInit {
     this.http.get('http://localhost:3000/DoWork').subscribe(
       data => {
         if (Array.isArray(data)) {
-          this.items.push({first: data.length.toString(), last: "aaa"});
-          this.items.push({first: JSON.stringify(data), last: "aaa"});
-          data.forEach(function(item) {
-            this.items.push({first: "bbb", last: "aaa"});
+          for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+
             if (First in item && Last in item)
               this.items.push({first: item[First], last: item[Last]});
-          });
+          }
         }
       },
       error => this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
