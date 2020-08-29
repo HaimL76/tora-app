@@ -4,8 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 export interface Person {
-  name: string;
-  phone: string;
+  first: string;
+  last: string;
 }
 
 @Component({
@@ -19,15 +19,22 @@ export class PersonComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    const name = 'name';
-    const phone = 'phone';
+    const First = 'first';
+    const Last = 'last';
 
     this.http.get('http://localhost:3000/DoWork').subscribe(
       data => {
-        if (name in data && phone in data)
-          this.items.push({name: data[name], phone: data[phone]});
+        if (Array.isArray(data)) {
+          this.items.push({first: data.length.toString(), last: "aaa"});
+          this.items.push({first: JSON.stringify(data), last: "aaa"});
+          data.forEach(function(item) {
+            this.items.push({first: "bbb", last: "aaa"});
+            if (First in item && Last in item)
+              this.items.push({first: item[First], last: item[Last]});
+          });
+        }
       },
-      error => this.items.push({name: JSON.stringify(error), phone: JSON.stringify(error)}))
+      error => this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
   }
 
   // Method in component class
@@ -35,5 +42,5 @@ export class PersonComponent implements OnInit {
     return item.id;
   }
 
-  items: Person[] = [{name: "HaimL", phone: "0525868060"}, {name: "Einatush", phone: "0525868070"}];
+  items: Person[] = [{first: "HaimL", last: "0525868060"}, {first: "Einatush", last: "0525868070"}];
 }
