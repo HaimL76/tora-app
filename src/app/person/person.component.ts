@@ -25,7 +25,7 @@ export class PersonComponent implements OnInit {
     this.http.get('http://localhost:3000/DoWork').subscribe(
       data => {
         if (name in data && phone in data)
-        this.items.push({name: data[name], phone: data[phone]});
+          this.items.push({name: data[name], phone: data[phone]});
       },
       error => this.items.push({name: JSON.stringify(error), phone: JSON.stringify(error)}))
   }
