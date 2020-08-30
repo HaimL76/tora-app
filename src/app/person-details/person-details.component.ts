@@ -21,8 +21,8 @@ export class PersonDetailsComponent implements OnInit {
   ngOnInit(): void {
     const First = 'first';
     const Last = 'last';
-    
-    this.http.get('http://localhost:3000/people').subscribe(
+
+    this.http.get('http://localhost:3000/person/1').subscribe(
       data => {
         if (Array.isArray(data)) {
           this.person = data[0];
