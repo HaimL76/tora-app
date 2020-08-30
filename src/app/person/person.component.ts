@@ -5,6 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 export interface Person {
+  id: number;
   first: string;
   last: string;
 }
@@ -22,7 +23,7 @@ export class PersonComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(params => {
-      this.items.push({first: JSON.stringify(params), last: "aaa" });
+      //this.items.push({first: JSON.stringify(params), last: "aaa" });
     });
 
     const First = 'first';
@@ -35,11 +36,11 @@ export class PersonComponent implements OnInit {
             var item = data[i];
 
             if (First in item && Last in item)
-              this.items.push({first: item[First], last: item[Last]});
+              this.items.push(item);
           }
         }
       },
-      error => this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+      error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
   }
 
   // Method in component class
@@ -47,5 +48,5 @@ export class PersonComponent implements OnInit {
     return item.id;
   }
 
-  items: Person[] = [{first: "HaimL", last: "0525868060"}, {first: "Einatush", last: "0525868070"}];
+  items: Person[] = [];//{first: "HaimL", last: "0525868060"}, {first: "Einatush", last: "0525868070"}];
 }
