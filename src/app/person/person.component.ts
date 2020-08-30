@@ -29,7 +29,7 @@ export class PersonComponent implements OnInit {
     const First = 'first';
     const Last = 'last';
 
-    this.http.get('http://localhost:3000/DoWork').subscribe(
+    this.http.get('http://localhost:3000/people').subscribe(
       data => {
         if (Array.isArray(data)) {
           for (var i = 0; i < data.length; i++) {
