@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Person {
   first: string;
@@ -16,9 +17,14 @@ export interface Person {
 
 export class PersonComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      this.items.push({first: JSON.stringify(params), last: "aaa" });
+    });
+
     const First = 'first';
     const Last = 'last';
 
