@@ -75,4 +75,16 @@ export class PersonDetailsComponent implements OnInit {
   trackByFn(index, item) {
     return item.title;
   }
+
+  onClickMe() {
+    //alert('Hello, World!');
+    var url = 'http://localhost:3000/person/' + this.id.toString();
+    //var url = 'http://localhost:3000/luli';
+
+    var body = {alalalalala: 12};
+
+    this.http.post(url, body).subscribe(
+      data => {},
+      error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+  }
 }
