@@ -22,7 +22,9 @@ export class PersonDetailsComponent implements OnInit {
     const First = 'first';
     const Last = 'last';
 
-    this.http.get('http://localhost:3000/person/1').subscribe(
+    var url = 'http://localhost:3000/person/' + this.id.toString();
+
+    this.http.get(url).subscribe(
       data => {
         if (Array.isArray(data)) {
           this.person = data[0];
