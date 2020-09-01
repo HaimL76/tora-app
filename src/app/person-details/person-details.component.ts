@@ -22,7 +22,7 @@ export interface BookQuantity extends Book {
 export class PersonDetailsComponent implements OnInit {
   id: number;
   person: Person;
-  books: BookQuantity[];
+  books: BookQuantity[] = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.id = this.route.snapshot.params.id;
