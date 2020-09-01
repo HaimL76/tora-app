@@ -5,13 +5,27 @@ import { catchError, retry } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../person/person.component';
 
-export interface Book {
+export class Book {
+  constructor() { }
+
   title: string;
-  quantity: number;
+  quantity: number = 0;
 }
 
-export interface BookQuantity extends Book {
-  p_quantity: number;
+export class BookQuantity extends Book {
+  p_quantity: number = 0;
+  prog_percent: number;
+
+  initProgPercent() {
+    var val = 0;
+
+    //alert(this.quantity);
+
+    if (this.quantity > 0)
+      val = ((this.quantity / 2) / this.quantity) * 100;
+
+    this.prog_percent = val;
+  }
 }
 
 @Component({
@@ -31,6 +45,8 @@ export class PersonDetailsComponent implements OnInit {
   ngOnInit(): void {
     const first = 'first';
     const last = 'last';
+    const title = 'title';
+    const quantity = 'quantity';
 
     var url = 'http://localhost:3000/person/' + this.id.toString();
 
@@ -40,9 +56,14 @@ export class PersonDetailsComponent implements OnInit {
           for (var i = 0; i < data.length; i++) {
             var item = data[i];
 
-            if (first in item && last in item) {
+            if (first in item && last in item && title in item && quantity in item) {
+              //alert(JSON.stringify(item));
               this.person = item;
-              this.books.push(item);
+              var b = new BookQuantity();
+              b.title = item.title;
+              b.quantity = item.quantity;
+              b.initProgPercent();
+              this.books.push(b);
             }
           }
         }
