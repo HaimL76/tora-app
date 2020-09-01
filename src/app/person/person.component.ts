@@ -26,8 +26,8 @@ export class PersonComponent implements OnInit {
       //this.items.push({first: JSON.stringify(params), last: "aaa" });
     });
 
-    const First = 'first';
-    const Last = 'last';
+    const first = 'first';
+    const last = 'last';
 
     this.http.get('http://localhost:3000/people').subscribe(
       data => {
@@ -35,7 +35,7 @@ export class PersonComponent implements OnInit {
           for (var i = 0; i < data.length; i++) {
             var item = data[i];
 
-            if (First in item && Last in item)
+            if (first in item && last in item)
               this.items.push(item);
           }
         }

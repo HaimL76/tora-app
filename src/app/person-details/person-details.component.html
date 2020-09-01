@@ -1,5 +1,6 @@
 <div flex-container>
-    <ng-container>            
-            <h1>{{person.first}} {{person.last}}</h1>
+    <h1>{{person.first}} {{person.last}}</h1>
+    <ng-container *ngFor=" let book of books; trackBy: trackByFn;">
+        AAAA
     </ng-container>
 </div>
