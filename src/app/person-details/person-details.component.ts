@@ -4,6 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../person/person.component';
+import { 
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  ValidatorFn
+ } from '@angular/forms';
 
 export class Book {
   constructor() { }
@@ -36,10 +43,33 @@ export class BookQuantity extends Book {
 export class PersonDetailsComponent implements OnInit {
   id: number;
   person: Person;
+  person_books: BookQuantity[] = [];
   books: BookQuantity[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  form: FormGroup;
+  orders = [];
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder) { 
     this.id = this.route.snapshot.params.id;
+
+    this.form = this.formBuilder.group({
+      orders: ['']
+    });
+    
+    this.orders = this.getOrders();
+  }
+
+  submit() {
+
+  }
+
+  getOrders() {
+    return [
+      { id: '1', name: 'order 1' },
+      { id: '2', name: 'order 2' },
+      { id: '3', name: 'order 3' },
+      { id: '4', name: 'order 4' }
+    ];
   }
 
   ngOnInit(): void {
@@ -63,12 +93,25 @@ export class PersonDetailsComponent implements OnInit {
               b.title = item.title;
               b.quantity = item.quantity;
               b.initProgPercent();
-              this.books.push(b);
+              this.person_books.push(b);
             }
           }
         }
       },
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+
+      url = 'http://localhost:3000/books';
+
+      this.http.get(url).subscribe(
+        data => {
+          if (Array.isArray(data)) {
+            this.books = data;
+            //for (var i = 0; i < data.length; i++) {
+//              this.books.push(data[i]);
+            //}
+          }
+        },
+        error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
   }
   
   // Method in component class
