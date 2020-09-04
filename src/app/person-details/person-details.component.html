@@ -15,8 +15,8 @@
 
     <form [formGroup]="form" (ngSubmit)="submit()">
         <label for="books">ספרים</label>
-        <select formControlName="books" id="books">
-          <option *ngFor="let book of books; let i = index" [value]="book.id">
+        <select formControlName="books" id="books" [(ngModel)]="selBook">
+          <option *ngFor="let book of books" [ngValue]="book">
             {{book.title}}
           </option>
         </select>

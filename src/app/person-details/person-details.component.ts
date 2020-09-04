@@ -93,8 +93,11 @@ export class PersonDetailsComponent implements OnInit {
 
       this.http.get(url).subscribe(
         data => {
-          if (Array.isArray(data)) {
+          if (Array.isArray(data) && data.length > 0) {
             this.books = data;
+
+            this.selBook = this.books[0];
+            //alert(JSON.stringify(this.books[0]));
             //for (var i = 0; i < data.length; i++) {
 //              this.books.push(data[i]);
             //}
@@ -108,7 +111,10 @@ export class PersonDetailsComponent implements OnInit {
     return item.title;
   }
 
+  selBook: any;// = {Id:4,title:"בבא בתרא",quantity:1250}
+
   onClickMe() {
+    alert(JSON.stringify(this.selBook));
     //alert('Hello, World!');
     var url = 'http://localhost:3000/person/' + this.id.toString();
     //var url = 'http://localhost:3000/luli';
