@@ -55,21 +55,10 @@ export class PersonDetailsComponent implements OnInit {
     this.form = this.formBuilder.group({
       orders: ['']
     });
-    
-    this.orders = this.getOrders();
   }
 
   submit() {
 
-  }
-
-  getOrders() {
-    return [
-      { id: '1', name: 'order 1' },
-      { id: '2', name: 'order 2' },
-      { id: '3', name: 'order 3' },
-      { id: '4', name: 'order 4' }
-    ];
   }
 
   ngOnInit(): void {
