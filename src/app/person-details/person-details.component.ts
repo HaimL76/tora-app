@@ -81,10 +81,10 @@ export class PersonDetailsComponent implements OnInit {
     var url = 'http://localhost:3000/person/' + this.id.toString();
     //var url = 'http://localhost:3000/luli';
 
-    var body = {alalalalala: 12};
-
+    
+    var body = { person: this.id, book: 3 };
     this.http.post(url, body).subscribe(
       data => {},
-      error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+      error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
   }
 }
