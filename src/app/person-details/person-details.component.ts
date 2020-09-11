@@ -29,7 +29,7 @@ export class BookQuantity extends Book {
     //alert(this.quantity);
 
     if (this.quantity > 0)
-      val = ((this.quantity / 2) / this.quantity) * 100;
+      val = ((this.p_quantity / 2) / this.quantity) * 100;
 
     this.prog_percent = val;
   }
@@ -81,6 +81,7 @@ export class PersonDetailsComponent implements OnInit {
               var b = new BookQuantity();
               b.title = item.title;
               b.quantity = item.quantity;
+              b.p_quantity = item.p_quantity;
               b.initProgPercent();
               this.person_books.push(b);
             }
