@@ -114,13 +114,14 @@ export class PersonDetailsComponent implements OnInit {
   selBook: any;// = {Id:4,title:"בבא בתרא",quantity:1250}
 
   onClickMe() {
-    alert(JSON.stringify(this.selBook));
+    //alert(JSON.stringify(this.selBook));
     //alert('Hello, World!');
     var url = 'http://localhost:3000/person/' + this.id.toString();
     //var url = 'http://localhost:3000/luli';
 
     
-    var body = { person: this.id, book: 3 };
+    var body = { person: this.id, book: this.selBook.id };
+    //alert(JSON.stringify(body));
     this.http.post(url, body).subscribe(
       data => {},
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
