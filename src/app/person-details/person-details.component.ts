@@ -53,7 +53,7 @@ export class PersonDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params.id;
 
     this.form = this.formBuilder.group({
-      orders: ['']
+      books: ['']
     });
   }
 
