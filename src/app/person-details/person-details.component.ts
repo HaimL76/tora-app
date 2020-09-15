@@ -12,6 +12,12 @@ import {
   ValidatorFn
  } from '@angular/forms';
 
+export class BookCategory {
+  constructor() { }
+
+  name: string;
+}
+
 export class Book {
   constructor() { }
 
@@ -45,15 +51,16 @@ export class PersonDetailsComponent implements OnInit {
   person: Person;
   person_books: BookQuantity[] = [];
   books: BookQuantity[] = [];
+  categories: BookCategory[] = [];
 
   form: FormGroup;
-  orders = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder) { 
     this.id = this.route.snapshot.params.id;
 
     this.form = this.formBuilder.group({
-      books: ['']
+      books: [''],
+      categories: ['']
     });
   }
 
@@ -66,6 +73,9 @@ export class PersonDetailsComponent implements OnInit {
     const last = 'last';
     const title = 'title';
     const quantity = 'quantity';
+
+    const category = 'category';
+    const name = 'name';
 
     var url = 'http://localhost:3000/person/' + this.id.toString();
 
@@ -95,6 +105,16 @@ export class PersonDetailsComponent implements OnInit {
       this.http.get(url).subscribe(
         data => {
           if (Array.isArray(data) && data.length > 0) {
+            data.map((value, index, data) => {
+              if (category in value && name in value) {
+                const categId = value[category];
+                const categName = value[name];
+
+                if (categId > 0 && categName && !(categId in this.categories)) 
+                  this.categories.push(value);
+              }
+            });
+
             this.books = data;
 
             this.selBook = this.books[0];
@@ -113,6 +133,7 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   selBook: any;// = {Id:4,title:"בבא בתרא",quantity:1250}
+  selCateg: any;
 
   onClickMe() {
     //alert(JSON.stringify(this.selBook));

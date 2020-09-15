@@ -14,7 +14,12 @@
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
-        <label for="books">ספרים</label>
+        <label for="books">קטגוריות</label>
+        <select formControlName="categories" id="categories" [(ngModel)]="selCateg">
+          <option *ngFor="let categ of categories" [ngValue]="categ">
+            {{categ.name}}
+          </option>
+        </select>
         <select formControlName="books" id="books" [(ngModel)]="selBook">
           <option *ngFor="let book of books" [ngValue]="book">
             {{book.title}}
