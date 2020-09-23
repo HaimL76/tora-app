@@ -137,7 +137,7 @@ export class PersonDetailsComponent implements OnInit {
 
   onCategorySelected() {
     const category = "category";
-    //alert(typeof this.selCateg);
+
     if (this.selCateg && category in this.selCateg) {
       var categId = this.selCateg[category];
 
@@ -181,7 +181,7 @@ export class PersonDetailsComponent implements OnInit {
 
   onChange(newValue) {
     //console.log(newValue);
-    this.selCateg = newValue;
+    //this.selCateg = newValue;
 
     this.onCategorySelected();
     // ... do other stuff here ...
