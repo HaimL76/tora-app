@@ -64,6 +64,16 @@ export class PersonDetailsComponent implements OnInit {
     });
   }
 
+  getFirst() {
+    if (this.person)
+      return this.person.first;
+  }
+
+  getLast() {
+    if (this.person)
+      return this.person.last;
+  }
+
   submit() {
 
   }
@@ -115,16 +125,36 @@ export class PersonDetailsComponent implements OnInit {
               }
             });
 
-            this.books = data;
+            if (this.categories.length > 0) {
+              this.selCateg = this.categories[0];
 
-            this.selBook = this.books[0];
-            //alert(JSON.stringify(this.books[0]));
-            //for (var i = 0; i < data.length; i++) {
-//              this.books.push(data[i]);
-            //}
+              this.onCategorySelected();
+            }
           }
         },
-        error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+        error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+  }
+
+  onCategorySelected() {
+    const category = "category";
+    //alert(typeof this.selCateg);
+    if (this.selCateg && category in this.selCateg) {
+      var categId = this.selCateg[category];
+
+      if (categId) {
+        var url = 'http://localhost:3000/books/' + categId.toString();
+
+        this.http.get(url).subscribe(
+          data => {
+            if (Array.isArray(data) && data.length > 0) {
+              this.books = data;
+
+              this.selBook = this.books[0];
+            }
+          },
+          error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+      }
+    }
   }
   
   // Method in component class
@@ -147,5 +177,13 @@ export class PersonDetailsComponent implements OnInit {
     this.http.post(url, body).subscribe(
       data => {},
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+  }
+
+  onChange(newValue) {
+    //console.log(newValue);
+    this.selCateg = newValue;
+
+    this.onCategorySelected();
+    // ... do other stuff here ...
   }
 }

@@ -1,5 +1,5 @@
 <div flex-container>
-    <h1>{{person.first}} {{person.last}}</h1>
+    <h1>{{getFirst()}} {{getLast()}}</h1>
     <div class="card-container flex-container">
         <ng-container *ngFor=" let book of person_books; trackBy: trackByFn;">
             <a class="card">
@@ -14,18 +14,22 @@
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
+      <div>
         <label for="books">קטגוריות</label>
-        <select formControlName="categories" id="categories" [(ngModel)]="selCateg">
+        <select formControlName="categories" id="categories" [(ngModel)]="selCateg" (change)="onChange($event.target.value)">
           <option *ngFor="let categ of categories" [ngValue]="categ">
             {{categ.name}}
           </option>
         </select>
+      </div>
+      <div>
+        <label for="books">ספרים</label>
         <select formControlName="books" id="books" [(ngModel)]="selBook">
           <option *ngFor="let book of books" [ngValue]="book">
             {{book.title}}
           </option>
         </select>
-      
+      </div>
         <button (click)="onClickMe()">+</button>
       </form>
 </div>
