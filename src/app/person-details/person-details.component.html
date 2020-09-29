@@ -1,7 +1,11 @@
 <div flex-container>
     <h1>{{getFirst()}} {{getLast()}}</h1>
     <div class="card-container flex-container">
+      <div class="divTable">
+        <div class="divTableBody">
         <ng-container *ngFor=" let book of person_books; trackBy: trackByFn;">
+          <div class="divTableRow">
+            <div class="divTableCell" style="width: 5%;">
             <a class="card">
                 <!--<svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>-->
                 
@@ -10,26 +14,38 @@
 
                 <!--<svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>-->
             </a>
+            </div>
+          </div>
         </ng-container>
+        </div>
+      </div>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
-      <div>
-        <label for="books">קטגוריות</label>
-        <select formControlName="categories" id="categories" [(ngModel)]="selCateg" (change)="onChange($event.target.value)">
-          <option *ngFor="let categ of categories" [ngValue]="categ">
-            {{categ.name}}
-          </option>
-        </select>
+      <div class="divTable">
+        <div class="divTableBody">
+          <div class="divTableRow">
+            <div class="divTableCell" style="width: 5%;"><label for="books">קטגוריות</label></div>
+            <div class="divTableCell">
+              <select formControlName="categories" id="categories" [(ngModel)]="selCateg" (change)="onChange($event.target.value)">
+                <option *ngFor="let categ of categories" [ngValue]="categ">
+                  {{categ.name}}
+                </option>
+              </select></div>
+          </div>
+          <div class="divTableRow">
+            <div class="divTableCell"><label for="books">ספרים</label></div>
+            <div class="divTableCell">
+              <select formControlName="books" id="books" [(ngModel)]="selBook">
+                <option *ngFor="let book of books" [ngValue]="book">
+                  {{book.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="books">ספרים</label>
-        <select formControlName="books" id="books" [(ngModel)]="selBook">
-          <option *ngFor="let book of books" [ngValue]="book">
-            {{book.title}}
-          </option>
-        </select>
-      </div>
-        <button (click)="onClickMe()">+</button>
+        <button (click)="onClickMe()" title="הוסף ספר לימוד">
+          +</button>
       </form>
 </div>
