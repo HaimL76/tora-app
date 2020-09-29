@@ -87,6 +87,9 @@ export class PersonDetailsComponent implements OnInit {
     const category = 'category';
     const name = 'name';
 
+    this.person_books = [];
+    this.categories = [];
+
     var url = 'http://localhost:3000/person/' + this.id.toString();
 
     this.http.get(url).subscribe(
@@ -175,7 +178,9 @@ export class PersonDetailsComponent implements OnInit {
     var body = { person: this.id, book: this.selBook.id };
     //alert(JSON.stringify(body));
     this.http.post(url, body).subscribe(
-      data => {},
+      data => {        
+        this.ngOnInit();
+      },
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
   }
 
