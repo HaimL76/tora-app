@@ -21,6 +21,7 @@ export class BookCategory {
 export class Book {
   constructor() { }
 
+  book_id: number;
   title: string;
   quantity: number = 0;
 }
@@ -28,6 +29,7 @@ export class Book {
 export class BookQuantity extends Book {
   p_quantity: number = 0;
   prog_percent: number;
+  person_id: number;
 
   initProgPercent() {
     var val = 0;
@@ -79,6 +81,9 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const id = 'id';
+    const book_id = 'book_id';
+    const person_id = 'person_id';
     const first = 'first';
     const last = 'last';
     const title = 'title';
@@ -98,14 +103,17 @@ export class PersonDetailsComponent implements OnInit {
           for (var i = 0; i < data.length; i++) {
             var item = data[i];
 
-            if (first in item && last in item && title in item && quantity in item) {
+            if (person_id in item && book_id in item && first in item && last in item && title in item && quantity in item) {
               //alert(JSON.stringify(item));
               this.person = item;
               var b = new BookQuantity();
+              //b.book_id = item.
               b.title = item.title;
               b.quantity = item.quantity;
               b.p_quantity = item.p_quantity;
               b.initProgPercent();
+              b.book_id = item.book_id;
+              b.person_id = item.person_id;
               this.person_books.push(b);
             }
           }
@@ -182,6 +190,30 @@ export class PersonDetailsComponent implements OnInit {
         this.ngOnInit();
       },
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+  }
+
+  onClickRemove(e, book_quantity) {
+    //alert(JSON.stringify(e));
+
+    //alert(JSON.stringify(book));
+    const person_id = 'person_id';
+    const book_id = 'book_id';
+
+    if (book_quantity && book_id in book_quantity && person_id in book_quantity) {
+      var b_id = book_quantity.book_id;
+      var p_id = book_quantity.person_id;
+      
+      if (p_id && b_id) {
+        var url = 'http://localhost:3000/person/' + p_id.toString();
+        url += '/books/' + b_id.toString();
+
+        this.http.delete(url).subscribe(
+          data => {        
+            this.ngOnInit();
+          },
+          error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+        }
+      }
   }
 
   onChange(newValue) {
