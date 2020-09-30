@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../person/person.component';
+
 import { 
   FormBuilder,
   FormGroup,
@@ -139,7 +140,16 @@ export class PersonDetailsComponent implements OnInit {
             if (this.categories.length > 0) {
               this.selCateg = this.categories[0];
 
-              this.onCategorySelected();
+              if (this.selCateg) {
+                const value = 'value';
+
+                const sel = this.form.get('categories');
+          
+                if (sel && value in sel) 
+                  sel.setValue(this.selCateg);
+
+                this.onCategorySelected();
+              }
             }
           }
         },
@@ -169,6 +179,15 @@ export class PersonDetailsComponent implements OnInit {
               this.books = data;
 
               this.selBook = this.books[0];
+
+              if (this.selBook) {
+                const value = 'value';
+
+                const sel = this.form.get('books');
+          
+                if (sel && value in sel) 
+                  sel.setValue(this.selBook);
+              }
             }
           },
           error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))

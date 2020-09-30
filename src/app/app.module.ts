@@ -10,6 +10,7 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSliderModule} from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
+    MatSliderModule,
     ReactiveFormsModule
   ],
   schemas: [ 
