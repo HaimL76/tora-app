@@ -157,11 +157,7 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
+    return value + '%';
   }
 
   onCategorySelected() {

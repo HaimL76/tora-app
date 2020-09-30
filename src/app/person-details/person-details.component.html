@@ -15,7 +15,12 @@
                   </div>
                   <div class="card-grid-slider">
                     <mat-progress-bar [value]="book.prog_percent" class="right-25"></mat-progress-bar>
-                    <mat-slider min="1" max="5" step="0.5" value="1.5" aria-label="aaa"></mat-slider>
+                    <mat-slider
+                      thumbLabel
+                      [displayWith]="formatLabel"
+                      tickInterval="1"
+                      min="0"
+                      max="100"></mat-slider>
                   </div>
                 </a>
               </div>
