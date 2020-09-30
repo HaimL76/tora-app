@@ -146,6 +146,14 @@ export class PersonDetailsComponent implements OnInit {
         error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
   }
 
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+
   onCategorySelected() {
     const category = "category";
 
@@ -216,11 +224,25 @@ export class PersonDetailsComponent implements OnInit {
       }
   }
 
-  onChange(newValue) {
-    //console.log(newValue);
-    //this.selCateg = newValue;
+  onChangeCateg() {
+    const value = 'value';
 
-    this.onCategorySelected();
-    // ... do other stuff here ...
+    const sel = this.form.get('categories');
+
+    if (sel && value in sel) {
+      this.selCateg = sel.value;
+
+      if (this.selCateg)
+        this.onCategorySelected();
+    }
+  }
+
+  onChangeBook() {    
+    const value = 'value';
+
+    const sel = this.form.get('books');
+
+    if (sel && value in sel) 
+      this.selBook = sel.value;
   }
 }

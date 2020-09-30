@@ -36,3 +36,8 @@
 button[title]:hover {
 	color: aqua;
 }
+
+mat-slider {
+	width: 300px;
+  }
+  
