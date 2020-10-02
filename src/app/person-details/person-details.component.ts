@@ -31,6 +31,7 @@ export class BookQuantity extends Book {
   p_quantity: number = 0;
   prog_percent: number;
   person_id: number;
+  //pbook_id: number;
 
   initProgPercent() {
     var val = 0;
@@ -55,6 +56,7 @@ export class PersonDetailsComponent implements OnInit {
   person_books: BookQuantity[] = [];
   books: BookQuantity[] = [];
   categories: BookCategory[] = [];
+  books_percentage = {};
 
   form: FormGroup;
 
@@ -158,6 +160,21 @@ export class PersonDetailsComponent implements OnInit {
 
   formatLabel(value: number) {
     return value + '%';
+  }
+
+  setSliderValue(event, book) {
+    const value = 'value';
+    const book_id = 'book_id';
+    const person_id = 'person_id';
+
+    if (book && book_id in book && person_id in book && event && value in event) {
+      const val = event[value];
+      const b_id = book.book_id;
+
+      if (val && b_id) {
+        this.books_percentage[b_id] = val;
+      }
+    }
   }
 
   onCategorySelected() {
