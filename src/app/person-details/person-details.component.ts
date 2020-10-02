@@ -56,7 +56,7 @@ export class PersonDetailsComponent implements OnInit {
   person_books: BookQuantity[] = [];
   books: BookQuantity[] = [];
   categories: BookCategory[] = [];
-  books_percentage = {};
+  //books_percentage = {};
 
   form: FormGroup;
 
@@ -172,7 +172,8 @@ export class PersonDetailsComponent implements OnInit {
       const b_id = book.book_id;
 
       if (val && b_id) {
-        this.books_percentage[b_id] = val;
+        //this.books_percentage[b_id] = val;
+        book.book_quantity = (val / 100) * book.quantity;
       }
     }
   }
