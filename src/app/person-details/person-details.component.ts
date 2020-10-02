@@ -36,10 +36,8 @@ export class BookQuantity extends Book {
   initProgPercent() {
     var val = 0;
 
-    //alert(this.quantity);
-
     if (this.quantity > 0)
-      val = ((this.p_quantity / 2) / this.quantity) * 100;
+      val = (this.p_quantity / this.quantity) * 100;
 
     this.prog_percent = val;
   }
@@ -56,7 +54,6 @@ export class PersonDetailsComponent implements OnInit {
   person_books: BookQuantity[] = [];
   books: BookQuantity[] = [];
   categories: BookCategory[] = [];
-  //books_percentage = {};
 
   form: FormGroup;
 
@@ -155,7 +152,7 @@ export class PersonDetailsComponent implements OnInit {
             }
           }
         },
-        error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(error)}))
+        error => {});
   }
 
   formatLabel(value: number) {
@@ -166,14 +163,18 @@ export class PersonDetailsComponent implements OnInit {
     const value = 'value';
     const book_id = 'book_id';
     const person_id = 'person_id';
+    const initProgPercent = 'initProgPercent';
+    const p_quantity = 'p_quantity';
 
-    if (book && book_id in book && person_id in book && event && value in event) {
+    if (book && book_id in book && person_id in book && p_quantity in book && event && value in event) {
       const val = event[value];
       const b_id = book.book_id;
 
       if (val && b_id) {
-        //this.books_percentage[b_id] = val;
-        book.book_quantity = (val / 100) * book.quantity;
+        book.p_quantity = (val / 100) * book.quantity;
+
+        if (initProgPercent in book)
+          book.initProgPercent();
       }
     }
   }
@@ -233,10 +234,30 @@ export class PersonDetailsComponent implements OnInit {
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
   }
 
-  onClickRemove(e, book_quantity) {
-    //alert(JSON.stringify(e));
+  onClickSave(e, book_quantity) {
+    const person_id = 'person_id';
+    const book_id = 'book_id';
 
-    //alert(JSON.stringify(book));
+    if (book_quantity && book_id in book_quantity && person_id in book_quantity) {
+      var b_id = book_quantity.book_id;
+      var p_id = book_quantity.person_id;
+      
+      if (p_id && b_id) {
+        var body = { p_book: book_quantity };
+
+        var url = 'http://localhost:3000/person/' + p_id.toString();
+        url += '/books/' + b_id.toString();
+
+        this.http.post(url, body).subscribe(
+          data => {        
+            this.ngOnInit();
+          },
+          error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+        }
+      }
+  }
+
+  onClickRemove(e, book_quantity) {
     const person_id = 'person_id';
     const book_id = 'book_id';
 
