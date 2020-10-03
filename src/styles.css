@@ -54,13 +54,23 @@
     width: 360px;
     padding: 2px;
     display: grid;
-    grid-template-columns: 300px 60px;
+    grid-template-columns: 240px 60px 60px;
     grid-template-rows: auto;
-    grid-template-areas: "header button" "slider slider";
+    grid-template-areas: "header horiz-blank button" "vert-blank vert-blank vert-blank" "slider slider slider";
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease-in-out;
     line-height: 24px;
+}
+
+.card-grid-horiz-blank {
+    grid-area: vert-blank;
+    width: 65px;
+}
+
+.card-grid-vert-blank {
+    grid-area: vert-blank;
+    height: 35px;
 }
 
 .card-grid-header {
