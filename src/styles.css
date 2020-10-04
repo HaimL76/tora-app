@@ -54,7 +54,7 @@
     width: 360px;
     padding: 2px;
     display: grid;
-    grid-template-columns: 240px 60px 60px;
+    grid-template-columns: 200px 60px 100px;
     grid-template-rows: auto;
     grid-template-areas: "header horiz-blank button" "vert-blank vert-blank vert-blank" "slider slider slider" "progress progress progress";
     justify-content: center;

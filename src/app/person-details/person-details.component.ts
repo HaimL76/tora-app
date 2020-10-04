@@ -241,6 +241,13 @@ export class PersonDetailsComponent implements OnInit {
       book_quantity[editState] = true;
   }
 
+  onClickCancel(e, book_quantity) {
+    const editState = 'editState';
+
+    if (book_quantity && editState in book_quantity)
+      book_quantity[editState] = false;
+  }
+
   onClickSave(e, book_quantity) {
     const person_id = 'person_id';
     const book_id = 'book_id';
