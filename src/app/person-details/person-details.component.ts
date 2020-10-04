@@ -31,7 +31,7 @@ export class BookQuantity extends Book {
   p_quantity: number = 0;
   prog_percent: number;
   person_id: number;
-  //pbook_id: number;
+  editState: boolean = false;
 
   initProgPercent() {
     var val = 0;
@@ -232,6 +232,13 @@ export class PersonDetailsComponent implements OnInit {
         this.ngOnInit();
       },
       error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+  }
+
+  onClickEdit(e, book_quantity) {
+    const editState = 'editState';
+
+    if (book_quantity && editState in book_quantity)
+      book_quantity[editState] = true;
   }
 
   onClickSave(e, book_quantity) {
