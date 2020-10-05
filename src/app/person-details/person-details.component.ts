@@ -33,6 +33,49 @@ export class BookQuantity extends Book {
   person_id: number;
   editState: boolean = false;
 
+  constructor(private http: HttpClient) { 
+    super();
+  }
+
+  initData(reload: boolean) {
+    const id = 'id';
+    const book_id = 'book_id';
+    const person_id = 'person_id';
+    const first = 'first';
+    const last = 'last';
+    const title = 'title';
+    const quantity = 'quantity';
+
+    const category = 'category';
+    const name = 'name';
+    if (reload) {
+      var url = 'http://localhost:3000/person/' + this.person_id.toString();
+      url += '/books/' + this.book_id.toString();
+
+      this.http.get(url).subscribe(
+        data => {
+          if (Array.isArray(data)) {
+            for (var i = 0; i < data.length; i++) {
+              var item = data[i];
+  
+              if (person_id in item && book_id in item && quantity in item) {
+                //b.book_id = item.
+                this.title = item.title;
+                this.quantity = item.quantity;
+                this.p_quantity = item.p_quantity;
+                this.initProgPercent();
+                this.book_id = item.book_id;
+                this.person_id = item.person_id;
+              }
+            }
+          }
+        },
+        error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+    }
+
+    this.initProgPercent();
+  }
+
   initProgPercent() {
     var val = 0;
 
@@ -106,7 +149,7 @@ export class PersonDetailsComponent implements OnInit {
             if (person_id in item && book_id in item && first in item && last in item && title in item && quantity in item) {
               //alert(JSON.stringify(item));
               this.person = item;
-              var b = new BookQuantity();
+              var b = new BookQuantity(this.http);
               //b.book_id = item.
               b.title = item.title;
               b.quantity = item.quantity;
@@ -243,9 +286,16 @@ export class PersonDetailsComponent implements OnInit {
 
   onClickCancel(e, book_quantity) {
     const editState = 'editState';
+    const initProgPercent = 'initProgPercent';
+    const initData = 'initData';
 
-    if (book_quantity && editState in book_quantity)
+    if (book_quantity && editState in book_quantity) {
       book_quantity[editState] = false;
+
+      //this.ngOnInit();
+      if (initData in book_quantity)
+        book_quantity.initData(true);
+    }
   }
 
   onClickSave(e, book_quantity) {
