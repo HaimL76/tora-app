@@ -11,22 +11,31 @@
                             <a class="card divTable" style="width: 50%;">
                                 <div class="divTableBody" style="width: 100%;">
                                     <div class="divTableRow" style="width: 100%;">
-                                        <div class="divTableCell" style="width: 15%;">
-                                            <h2>{{book.title}}</h2>
-                                        </div>
-                                        <div class="divTableCell" style="width: 85%; text-align: left;">
-                                            <button id="btnDelete" (click)="onClickRemove($event, book)" title="הסר ספר לימוד"></button>
-                                            <button id="btnEdit" *ngIf="!book.editState" (click)="onClickEdit($event, book)" title="ערוך כרטיסיה"></button>
-                                            <button id="btnCancel" *ngIf="book.editState" (click)="onClickCancel($event, book)" title="בטל שינויים"></button>
-                                            <button id="btnSave" *ngIf="book.editState" (click)="onClickSave($event, book)" title="שמור שינויים"></button>
+                                        <div class="divTable">
+                                            <div class="divTableBody">
+                                                <div class="divTableRow" style="width: 100%;">
+                                                    <div class="divTableCell" style="width: 15%;">
+                                                        <h2>{{book.title}}</h2>
+                                                    </div>
+                                                    <div class="divTableCell" style="width: 85%; text-align: left;">
+                                                        <button id="btnDelete" (click)="onClickRemove($event, book)" title="הסר ספר לימוד"></button>
+                                                        <button id="btnEdit" *ngIf="!book.editState" (click)="onClickEdit($event, book)" title="ערוך כרטיסיה"></button>
+                                                        <button id="btnCancel" *ngIf="book.editState" (click)="onClickCancel($event, book)" title="בטל שינויים"></button>
+                                                        <button id="btnSave" *ngIf="book.editState" (click)="onClickSave($event, book)" title="שמור שינויים"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="divTableRow">
-                                        <div class="card-grid-vert-blank"></div>
-                                        <div class="card-grid-progress">
-                                            <mat-progress-bar [value]="book.prog_percent" class="right-25"></mat-progress-bar>
+                                        <div class="divTableCell" style="width: 100%;">
+                                            <mat-progress-bar [value]="book.prog_percent">
+
+                                            </mat-progress-bar>
                                         </div>
-                                        <div class="card-grid-slider" *ngIf="book.editState">
+                                    </div>
+                                    <div class="divTableRow" *ngIf="book.editState">
+                                        <div class="divTableCell" style="width: 100%;">
                                             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" [value]="book.prog_percent" min="0" max="100" (input)='setSliderValue($event, book)'>
                                             </mat-slider>
                                         </div>
