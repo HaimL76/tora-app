@@ -12,12 +12,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSliderModule} from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PersonUpdateComponent } from './person-update/person-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonComponent,
-    PersonDetailsComponent
+    PersonDetailsComponent,
+    PersonUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -156,3 +156,13 @@ body {
 .right-25 {
     margin-right: 25px;
 }
+
+#btnEdit {
+    background-image: url("~@angular/icons/edit.png");
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-position: center;
+    height: 25px;
+    width: 25px;
+    border: transparent;
+}
