@@ -1,1 +1,16 @@
-<p>person-update works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell" style="width: 5%;"><label for="books">שם פרטי</label></div>
+                <div class="divTableCell"><input type="text" id="txtFirst" value="{{getFirst()}}" />
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell" style="width: 5%;"><label for="books">שם משפחה</label></div>
+                <div class="divTableCell"><input type="text" id="txtFirst" value="{{getLast()}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
