@@ -29,6 +29,7 @@ export class Book {
 
 export class BookQuantity extends Book {
   p_quantity: number = 0;
+  p_quantity_current: number = 0;
   prog_percent: number;
   person_id: number;
   editState: boolean = false;
@@ -64,7 +65,7 @@ export class BookQuantity extends Book {
                 //b.book_id = item.
                 this.title = item.title;
                 this.quantity = item.quantity;
-                this.p_quantity = item.p_quantity;
+                this.p_quantity_current = this.p_quantity = item.p_quantity;
                 this.initProgPercent();
                 this.book_id = item.book_id;
                 this.person_id = item.person_id;
@@ -159,7 +160,7 @@ export class PersonDetailsComponent implements OnInit {
               //b.book_id = item.
               b.title = item.title;
               b.quantity = item.quantity;
-              b.p_quantity = item.p_quantity;
+              b.p_quantity_current = b.p_quantity = item.p_quantity;
 
               if (progress_counter in item)
                 b.p_progress_counter = item.progress_counter;
@@ -213,7 +214,7 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   checkProgressPart(book, percent) {
-    var current_percentage = 100 * (book.p_quantity / book.quantity);
+    var current_percentage = 100 * (book.p_quantity_current / book.quantity);
 
     var progress_parts = 100 / book.p_progress_counter;
 
@@ -240,7 +241,7 @@ export class PersonDetailsComponent implements OnInit {
 
       if (val && b_id) {
         if (p_progress_counter in book && book.p_progress_counter > 0) {
-          this.checkProgressPart(book, val);
+          //this.checkProgressPart(book, val);
         }
 
         book.p_quantity = (val / 100) * book.quantity;
@@ -336,6 +337,8 @@ export class PersonDetailsComponent implements OnInit {
       var p_id = book_quantity.person_id;
       
       if (p_id && b_id) {
+        this.checkProgressPart(book_quantity, book_quantity.prog_percent);
+
         var body = { p_book: book_quantity };
 
         var url = 'http://localhost:3000/person/' + p_id.toString();
