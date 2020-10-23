@@ -212,6 +212,20 @@ export class PersonDetailsComponent implements OnInit {
     return value + '%';
   }
 
+  checkProgressPart(book, percent) {
+    var current_percentage = 100 * (book.p_quantity / book.quantity);
+
+    var progress_parts = 100 / book.p_progress_counter;
+
+    var current_percentage_part = Math.floor(current_percentage / progress_parts);
+
+    var next_percentage_part = Math.floor(percent / progress_parts);
+
+    if (next_percentage_part > current_percentage_part) {
+      var result = confirm("You must enter progression");
+    }
+  }
+
   setSliderValue(event, book) {
     const value = 'value';
     const book_id = 'book_id';
@@ -225,20 +239,8 @@ export class PersonDetailsComponent implements OnInit {
       const b_id = book.book_id;
 
       if (val && b_id) {
-        if (p_progress_counter in book && book.p_progress_counter > 0)
-        {
-          var current_percentage = 100 * (book.p_quantity / book.quantity);
-
-          var progress_parts = 100 / book.p_progress_counter;
-
-          var current_percentage_part = Math.floor(current_percentage / progress_parts);
-
-          var next_percentage_part = Math.floor(val / progress_parts);
-
-          if (next_percentage_part > current_percentage_part)
-          {
-            var result = confirm("You must enter progression");
-          }
+        if (p_progress_counter in book && book.p_progress_counter > 0) {
+          this.checkProgressPart(book, val);
         }
 
         book.p_quantity = (val / 100) * book.quantity;
