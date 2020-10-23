@@ -218,18 +218,20 @@ export class PersonDetailsComponent implements OnInit {
     const person_id = 'person_id';
     const initProgPercent = 'initProgPercent';
     const p_quantity = 'p_quantity';
-    const progress_counter = 'progress_counter';
+    const p_progress_counter = 'p_progress_counter';
 
     if (book && book_id in book && person_id in book && p_quantity in book && event && value in event) {
       const val = event[value];
       const b_id = book.book_id;
 
       if (val && b_id) {
-        if (progress_counter in book && book.progress_counter > 0)
+        if (p_progress_counter in book && book.p_progress_counter > 0)
         {
           var current_percentage = 100 * (book.p_quantity / book.quantity);
 
-          var current_progress_parts = 100 / 1;
+          var progress_parts = 100 / book.p_progress_counter;
+
+          var current_percentage_part = current_percentage / progress_parts;
         }
 
         book.p_quantity = (val / 100) * book.quantity;
