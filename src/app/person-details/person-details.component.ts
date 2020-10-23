@@ -231,7 +231,14 @@ export class PersonDetailsComponent implements OnInit {
 
           var progress_parts = 100 / book.p_progress_counter;
 
-          var current_percentage_part = current_percentage / progress_parts;
+          var current_percentage_part = Math.floor(current_percentage / progress_parts);
+
+          var next_percentage_part = Math.floor(val / progress_parts);
+
+          if (next_percentage_part > current_percentage_part)
+          {
+            var result = confirm("You must enter progression");
+          }
         }
 
         book.p_quantity = (val / 100) * book.quantity;
