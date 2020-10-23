@@ -32,6 +32,7 @@ export class BookQuantity extends Book {
   prog_percent: number;
   person_id: number;
   editState: boolean = false;
+  p_progress_counter: number;
 
   constructor(private http: HttpClient) { 
     super();
@@ -45,6 +46,7 @@ export class BookQuantity extends Book {
     const last = 'last';
     const title = 'title';
     const quantity = 'quantity';
+    const progress_counter = 'progress_counter';
 
     const category = 'category';
     const name = 'name';
@@ -66,6 +68,9 @@ export class BookQuantity extends Book {
                 this.initProgPercent();
                 this.book_id = item.book_id;
                 this.person_id = item.person_id;
+
+                if (progress_counter in item)
+                  this.p_progress_counter = item.progress_counter;
               }
             }
           }
@@ -131,6 +136,7 @@ export class PersonDetailsComponent implements OnInit {
     const last = 'last';
     const title = 'title';
     const quantity = 'quantity';
+    const progress_counter= 'progress_counter';
 
     const category = 'category';
     const name = 'name';
@@ -154,6 +160,10 @@ export class PersonDetailsComponent implements OnInit {
               b.title = item.title;
               b.quantity = item.quantity;
               b.p_quantity = item.p_quantity;
+
+              if (progress_counter in item)
+                b.p_progress_counter = item.progress_counter;
+
               b.initProgPercent();
               b.book_id = item.book_id;
               b.person_id = item.person_id;
@@ -208,12 +218,20 @@ export class PersonDetailsComponent implements OnInit {
     const person_id = 'person_id';
     const initProgPercent = 'initProgPercent';
     const p_quantity = 'p_quantity';
+    const progress_counter = 'progress_counter';
 
     if (book && book_id in book && person_id in book && p_quantity in book && event && value in event) {
       const val = event[value];
       const b_id = book.book_id;
 
       if (val && b_id) {
+        if (progress_counter in book && book.progress_counter > 0)
+        {
+          var current_percentage = 100 * (book.p_quantity / book.quantity);
+
+          var current_progress_parts = 100 / 1;
+        }
+
         book.p_quantity = (val / 100) * book.quantity;
 
         if (initProgPercent in book)
