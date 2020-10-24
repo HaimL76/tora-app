@@ -35,6 +35,7 @@ export class BookQuantity extends Book {
   editState: boolean = false;
   p_progress_counter: number;
   achievement_number: number;
+  achievement_value: number;
 
   constructor(private http: HttpClient) { 
     super();
@@ -145,8 +146,8 @@ export class PersonDetailsComponent implements OnInit {
     const last = 'last';
     const title = 'title';
     const quantity = 'quantity';
-    const progress_counter= 'progress_counter';
-    const achievement_number= 'achievement_number';
+    const progress_counter = 'progress_counter';
+    const achievement_number = 'achievement_number';
 
     const category = 'category';
     const name = 'name';
@@ -240,6 +241,25 @@ export class PersonDetailsComponent implements OnInit {
 
     if (next_percentage_part > current_percentage_part) {
       var result = confirm("You must enter progression");
+    }
+  }
+
+  setNextAchievement(event, book) {
+    const value = 'value';
+    const book_id = 'book_id';
+    const person_id = 'person_id';
+    const initProgPercent = 'initProgPercent';
+    const p_quantity = 'p_quantity';
+    const p_progress_counter = 'p_progress_counter';
+    const achievement_value = 'achievement_value';
+
+    if (book && book_id in book && person_id in book && p_quantity in book && event) {//} && value in event) {
+      const val = event[value];
+      const b_id = book.book_id;
+
+      if (val && b_id) {
+        book.achievement_value = val;
+      }
     }
   }
 
@@ -347,12 +367,16 @@ export class PersonDetailsComponent implements OnInit {
   onClickSave(e, book_quantity) {
     const person_id = 'person_id';
     const book_id = 'book_id';
+    const achievement_value = 'achievement_value';
 
     if (book_quantity && book_id in book_quantity && person_id in book_quantity) {
       var b_id = book_quantity.book_id;
       var p_id = book_quantity.person_id;
       
       if (p_id && b_id) {
+        if (achievement_value in book_quantity)
+          alert(book_quantity.achievement_number);
+
         this.checkProgressPart(book_quantity, book_quantity.prog_percent);
 
         var body = { p_book: book_quantity };
