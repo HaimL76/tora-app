@@ -82,6 +82,10 @@ export class BookQuantity extends Book {
     this.initProgPercent();
   }
 
+  nextAchievement() {
+    return 10;
+  }
+
   initProgPercent() {
     var val = 0;
 

@@ -39,6 +39,10 @@
                                             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" [value]="book.prog_percent" min="0" max="100" (input)='setSliderValue($event, book)'>
                                             </mat-slider>
                                         </div>
+                                        <div class="divTableCell" style="width: 100%;">
+                                            <label>הזן את הישג מספר {{book.nextAchievement()}}</label>
+                                            <input type="number" id="achievment" min="1" max="100" />
+                                        </div>
                                     </div>
                                 </div>
                             </a>
