@@ -34,6 +34,7 @@ export class BookQuantity extends Book {
   person_id: number;
   editState: boolean = false;
   p_progress_counter: number;
+  achievement_number: number;
 
   constructor(private http: HttpClient) { 
     super();
@@ -83,7 +84,10 @@ export class BookQuantity extends Book {
   }
 
   nextAchievement() {
-    return 10;
+    if (this.achievement_number === null)
+      this.achievement_number = 0;
+
+    return this.achievement_number + 1;
   }
 
   initProgPercent() {
@@ -142,6 +146,7 @@ export class PersonDetailsComponent implements OnInit {
     const title = 'title';
     const quantity = 'quantity';
     const progress_counter= 'progress_counter';
+    const achievement_number= 'achievement_number';
 
     const category = 'category';
     const name = 'name';
@@ -168,6 +173,13 @@ export class PersonDetailsComponent implements OnInit {
 
               if (progress_counter in item)
                 b.p_progress_counter = item.progress_counter;
+
+              if (achievement_number in item) {
+                b.achievement_number = item.achievement_number;
+
+                if (b.achievement_number === null)
+                  b.achievement_number = 0;
+              }
 
               b.initProgPercent();
               b.book_id = item.book_id;
