@@ -256,13 +256,20 @@ export class PersonDetailsComponent implements OnInit {
     const p_quantity = 'p_quantity';
     const p_progress_counter = 'p_progress_counter';
     const achievement_value = 'achievement_value';
+    const data = 'data';
+    const srcElem = 'srcElement'
 
     if (book && book_id in book && person_id in book && p_quantity in book && event) {//} && value in event) {
-      const val = event[value];
-      const b_id = book.book_id;
+      //const val = event[value];
+      const elem = event[srcElem];
 
-      if (val && b_id) {
-        book.achievement_value = val;
+      if (elem && value in elem) {
+        const val = elem[value];
+        const b_id = book.book_id;
+
+        if (val && b_id) {
+          book.achievement_value = val;
+        }
       }
     }
   }
