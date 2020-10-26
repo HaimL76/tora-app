@@ -150,6 +150,7 @@ export class PersonDetailsComponent implements OnInit {
     const quantity = 'quantity';
     const progress_counter = 'progress_counter';
     const achievement_number = 'achievement_number';
+    const max_number = 'max_number';
     const pbid = 'p_b_id';
 
     const category = 'category';
@@ -179,8 +180,8 @@ export class PersonDetailsComponent implements OnInit {
               if (progress_counter in item)
                 b.p_progress_counter = item.progress_counter;
 
-              if (achievement_number in item) {
-                b.achievement_number = item.achievement_number;
+              if (max_number in item) {
+                b.achievement_number = item.max_number;
 
                 if (b.achievement_number === null)
                   b.achievement_number = 0;
