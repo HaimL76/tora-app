@@ -378,22 +378,23 @@ export class PersonDetailsComponent implements OnInit {
   onClickSave(e, book_quantity) {
     const person_id = 'person_id';
     const book_id = 'book_id';
+    const p_b_id = 'p_b_id';
     const achievement_value = 'achievement_value';
 
-    if (book_quantity && book_id in book_quantity && person_id in book_quantity) {
+    if (book_quantity && p_b_id in book_quantity && book_id in book_quantity && person_id in book_quantity) {
       var b_id = book_quantity.book_id;
       var p_id = book_quantity.person_id;
+      var pbid = book_quantity.p_b_id;
       
-      if (p_id && b_id) {
-        if (achievement_value in book_quantity)
-          alert(book_quantity.achievement_number);
+      if (p_id && b_id && pbid > 0) {
+        //if (achievement_value in book_quantity)
+//          alert(book_quantity.achievement_number);
 
         this.checkProgressPart(book_quantity, book_quantity.prog_percent);
 
         var body = { p_book: book_quantity };
 
-        var url = 'http://localhost:3000/person/' + p_id.toString();
-        url += '/books/' + b_id.toString();
+        var url = 'http://localhost:3000/person_book/' + pbid.toString();
 
         this.http.post(url, body).subscribe(
           data => {        
