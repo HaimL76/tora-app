@@ -36,6 +36,7 @@ export class BookQuantity extends Book {
   p_progress_counter: number;
   achievement_number: number;
   achievement_value: number;
+  p_b_id: number;
 
   constructor(private http: HttpClient) { 
     super();
@@ -63,7 +64,7 @@ export class BookQuantity extends Book {
             for (var i = 0; i < data.length; i++) {
               var item = data[i];
   
-              if (person_id in item && book_id in item && quantity in item) {
+              if (id in item && person_id in item && book_id in item && quantity in item) {
                 //b.book_id = item.
                 this.title = item.title;
                 this.quantity = item.quantity;
@@ -71,6 +72,7 @@ export class BookQuantity extends Book {
                 this.initProgPercent();
                 this.book_id = item.book_id;
                 this.person_id = item.person_id;
+                this.p_b_id = item.id;
 
                 if (progress_counter in item)
                   this.p_progress_counter = item.progress_counter;
@@ -148,6 +150,7 @@ export class PersonDetailsComponent implements OnInit {
     const quantity = 'quantity';
     const progress_counter = 'progress_counter';
     const achievement_number = 'achievement_number';
+    const pbid = 'p_b_id';
 
     const category = 'category';
     const name = 'name';
@@ -163,7 +166,7 @@ export class PersonDetailsComponent implements OnInit {
           for (var i = 0; i < data.length; i++) {
             var item = data[i];
 
-            if (person_id in item && book_id in item && first in item && last in item && title in item && quantity in item) {
+            if (pbid in item && person_id in item && book_id in item && first in item && last in item && title in item && quantity in item) {
               //alert(JSON.stringify(item));
               this.person = item;
               var b = new BookQuantity(this.http);
@@ -171,6 +174,7 @@ export class PersonDetailsComponent implements OnInit {
               b.title = item.title;
               b.quantity = item.quantity;
               b.p_quantity_current = b.p_quantity = item.p_quantity;
+              b.p_b_id = item.p_b_id;
 
               if (progress_counter in item)
                 b.p_progress_counter = item.progress_counter;
