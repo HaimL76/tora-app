@@ -236,6 +236,8 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   checkProgressPart(book, percent) {
+    var result = null;
+
     var current_percentage = 100 * (book.p_quantity_current / book.quantity);
 
     var progress_parts = 100 / book.p_progress_counter;
@@ -244,9 +246,10 @@ export class PersonDetailsComponent implements OnInit {
 
     var next_percentage_part = Math.floor(percent / progress_parts);
 
-    if (next_percentage_part > current_percentage_part) {
-      var result = confirm("You must enter progression");
-    }
+    if (next_percentage_part > current_percentage_part)
+      result = confirm("עליך להזין הישג נדרש");
+
+    return result;
   }
 
   setNextAchievement(event, book) {
@@ -391,20 +394,22 @@ export class PersonDetailsComponent implements OnInit {
         //if (achievement_value in book_quantity)
 //          alert(book_quantity.achievement_number);
 
-        this.checkProgressPart(book_quantity, book_quantity.prog_percent);
+        var result = this.checkProgressPart(book_quantity, book_quantity.prog_percent);
 
-        var body = { p_book: book_quantity };
+        if (result === null) {        
+          var body = { p_book: book_quantity };
 
-        var url = 'http://localhost:3000/person_book/' + pbid.toString();
+          var url = 'http://localhost:3000/person_book/' + pbid.toString();
 
-        this.http.post(url, body).subscribe(
-          data => {        
-            this.ngOnInit();
-          },
-          error => {})//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+          this.http.post(url, body).subscribe(
+            data => {        
+              this.ngOnInit();
+            },
+            error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+          }
         }
       }
-  }
+    }
 
   onClickRemove(e, book_quantity) {
     const person_id = 'person_id';
