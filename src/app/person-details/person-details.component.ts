@@ -42,6 +42,12 @@ export class BookQuantity extends Book {
     super();
   }
 
+  getProgPercent() {
+    return this.prog_percent
+        ? Math.round(this.prog_percent)
+        : 0;
+  }
+
   initData(reload: boolean) {
     const id = 'id';
     const book_id = 'book_id';
