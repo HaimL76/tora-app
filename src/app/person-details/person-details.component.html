@@ -15,7 +15,7 @@
                                             <div class="divTableBody">
                                                 <div class="divTableRow" style="width: 100%;">
                                                     <div class="divTableCell" style="width: 15%;">
-                                                        <h2>{{book.title}}</h2>
+                                                        <h2>{{book.title}} ({{book.prog_percent}}%)</h2>
                                                     </div>
                                                     <div class="divTableCell" style="width: 85%; text-align: left;">
                                                         <button id="btnDelete" (click)="onClickRemove($event, book)" title="הסר ספר לימוד"></button>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="divTableCell" style="width: 100%;">
                                             <label>הזן את הישג מספר {{book.nextAchievement()}}</label>
-                                            <input type="number" id="achievment" min="1" max="100" [value]="book.achievement_value" (input)='setNextAchievement($event, book)' />
+                                            <input type="number" id="achievment" min="1" max="100" step="10" [value]="book.achievement_value" (input)='setNextAchievement($event, book)' />
                                         </div>
                                     </div>
                                 </div>
