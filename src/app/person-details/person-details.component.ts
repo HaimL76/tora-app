@@ -43,7 +43,7 @@ export class BookQuantity extends Book {
   }
 
   getProgPercent() {
-    return this.prog_percent
+    return this.prog_percent > 0
         ? Math.round(this.prog_percent)
         : 0;
   }
