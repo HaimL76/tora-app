@@ -25,6 +25,7 @@ export class Book {
   book_id: number;
   title: string;
   quantity: number = 0;
+  categ_name: string;
 }
 
 export class BookQuantity extends Book {
@@ -57,6 +58,7 @@ export class BookQuantity extends Book {
     const title = 'title';
     const quantity = 'quantity';
     const progress_counter = 'progress_counter';
+    const categ_name = 'categ_name';
 
     const category = 'category';
     const name = 'name';
@@ -82,6 +84,9 @@ export class BookQuantity extends Book {
 
                 if (progress_counter in item)
                   this.p_progress_counter = item.progress_counter;
+
+                if (categ_name in item)
+                  this.categ_name = item.categ_name;
               }
             }
           }
@@ -158,6 +163,7 @@ export class PersonDetailsComponent implements OnInit {
     const achievement_number = 'achievement_number';
     const max_number = 'max_number';
     const pbid = 'p_b_id';
+    const categ_name = 'categ_name';
 
     const category = 'category';
     const name = 'name';
@@ -189,8 +195,11 @@ export class PersonDetailsComponent implements OnInit {
               if (max_number in item) {
                 b.achievement_number = item.max_number;
 
-                if (b.achievement_number === null)
+              if (b.achievement_number === null)
                   b.achievement_number = 0;
+
+              if (categ_name in item)
+                b.categ_name = item.categ_name;
               }
 
               b.initProgPercent();
