@@ -35,9 +35,11 @@ export class BookQuantity extends Book {
   person_id: number;
   editState: boolean = false;
   p_progress_counter: number;
-  achievement_number: number;
-  achievement_value: number;
+  required_achievs: number;
+  achiev_count: number = 0
+  achiev_data: string;
   p_b_id: number;
+  achieve_data: string;
 
   constructor(private http: HttpClient) { 
     super();
@@ -98,10 +100,10 @@ export class BookQuantity extends Book {
   }
 
   nextAchievement() {
-    if (this.achievement_number === null)
-      this.achievement_number = 0;
+    if (this.achiev_count === null)
+      this.achiev_count = 0;
 
-    return this.achievement_number + 1;
+    return this.achiev_count + 1;
   }
 
   initProgPercent() {
@@ -193,10 +195,10 @@ export class PersonDetailsComponent implements OnInit {
                 b.p_progress_counter = item.progress_counter;
 
               if (max_number in item) {
-                b.achievement_number = item.max_number;
+                b.achiev_count = item.max_number;
 
-              if (b.achievement_number === null)
-                  b.achievement_number = 0;
+              if (b.achiev_count === null)
+                  b.achiev_count = 0;
 
               if (categ_name in item)
                 b.categ_name = item.categ_name;
@@ -287,7 +289,7 @@ export class PersonDetailsComponent implements OnInit {
         const b_id = book.book_id;
 
         if (val && b_id) {
-          book.achievement_value = val;
+          book.achieve_data = val;
         }
       }
     }
@@ -420,7 +422,9 @@ export class PersonDetailsComponent implements OnInit {
             data => {        
               this.ngOnInit();
             },
-            error => {});//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
+            error => {
+              alert(JSON.stringify(error));
+            });//this.items.push({first: JSON.stringify(error), last: JSON.stringify(TJ)}))
           }
         }
       }
