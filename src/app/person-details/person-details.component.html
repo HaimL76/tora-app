@@ -17,7 +17,7 @@
                                                     <div class="divTableCell" style="width: 25%;">
                                                         <h2>{{book.categ_name}}, {{book.title}}</h2>
                                                         <h3>התקדמות: {{book.getProgPercent()}}%</h3>
-                                                        <h3>הישגים: {{book.achievement_number}}</h3>
+                                                        <h3>הישגים: {{book.achievement_number}} מתוך {{book.p_progress_counter}}</h3>
                                                     </div>
                                                     <div class="divTableCell" style="width: 85%; text-align: left;">
                                                         <button id="btnDelete" (click)="onClickRemove($event, book)" title="הסר ספר לימוד"></button>
