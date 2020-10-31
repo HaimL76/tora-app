@@ -149,6 +149,11 @@ export class PersonDetailsComponent implements OnInit {
       return this.person.last;
   }
 
+  getAchievInsteadPercent() {
+    if (this.person)
+      return this.person.achievInsteadPercent;
+  }
+
   submit() {
 
   }
@@ -433,14 +438,16 @@ export class PersonDetailsComponent implements OnInit {
   onClickRemove(e, book_quantity) {
     const person_id = 'person_id';
     const book_id = 'book_id';
+    const pbid = 'p_b_id';
 
-    if (book_quantity && book_id in book_quantity && person_id in book_quantity) {
+    if (book_quantity && book_id in book_quantity && person_id in book_quantity && pbid in book_quantity) {
       var b_id = book_quantity.book_id;
       var p_id = book_quantity.person_id;
+      var p_b_id = book_quantity.p_b_id;
       
-      if (p_id && b_id) {
-        var url = 'http://localhost:3000/person/' + p_id.toString();
-        url += '/books/' + b_id.toString();
+      if (p_id && b_id && p_b_id) {
+        var url = 'http://localhost:3000/p_b_id/' + p_b_id.toString();
+        //url += '/books/' + b_id.toString();
 
         this.http.delete(url).subscribe(
           data => {        

@@ -8,6 +8,7 @@ export interface Person {
   id: number;
   first: string;
   last: string;
+  achievInsteadPercent: boolean;
 }
 
 @Component({
