@@ -1,8 +1,6 @@
 <div flex-container>
     <h1>{{getFirst()}} {{getLast()}}</h1>
     <div><input type="checkbox" id="cbAchievInsteadPercent" [value]="true" matTooltip="This is simple Tooltip">הזן הישגים בלבד</div>
-    <button id="btnAdd" (click)="onClickMe()" title="הוסף ספר לימוד">
-    </button>
     <div class="card-container flex-container">
         <div class="divTable">
             <div class="divTableBody">
@@ -76,6 +74,11 @@
                   {{book.title}}
                 </option>
               </select>
+                    </div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        <button id="btnAdd" (click)="onClickMe()" title="הוסף ספר לימוד"></button>
                     </div>
                 </div>
             </div>
